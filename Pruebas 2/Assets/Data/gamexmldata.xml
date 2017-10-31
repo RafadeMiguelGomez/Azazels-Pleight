@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<questions>
+	<question><!-- questions 1 ! -->
+		<pregunta>¿Quien es el mas listo? (xml)</pregunta>
+		<respuesta es="Correcta">Pablo. (xml)</respuesta>
+		<respuesta es="InCorrecta">Jorge. (xml)</respuesta>
+		<respuesta es="InCorrecta">Mario. (xml)</respuesta>
+		<respuesta es="InCorrecta">Luis. (xml)</respuesta>
+	</question>
+
+	<question><!-- questions 2 ! -->
+			<pregunta>¿Quien es el mas guapo? (xml)</pregunta>
+			<respuesta es="Correcta">Pablo1. (xml)</respuesta>
+			<respuesta es="InCorrecta">Jorge. (xml)</respuesta>
+			<respuesta es="InCorrecta">Mario. (xml)</respuesta>
+			<respuesta es="InCorrecta">Luis. (xml)</respuesta>
+	</question>
+</questions>
