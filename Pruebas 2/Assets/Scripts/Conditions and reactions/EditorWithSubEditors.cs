@@ -17,11 +17,11 @@ public abstract class EditorWithSubEditors<TEditor, TTarget>: Editor
             return;
         }
         CleanupEditors();
-        subEditors = new TEditor[subEditors.Length];
+        subEditors = new TEditor[subEditorTargets.Length];
         for (int i = 0; i < subEditors.Length; i++)
         {
             subEditors[i] = CreateEditor(subEditorTargets[i]) as TEditor;
-            SubEditorSetip(subEditors[i]);
+            SubEditorSetup(subEditors[i]);
         }
     }
 
@@ -38,6 +38,6 @@ public abstract class EditorWithSubEditors<TEditor, TTarget>: Editor
         subEditors = null;
     }
 
-    protected abstract void SubEditorSetip(TEditor editor);
+    protected abstract void SubEditorSetup(TEditor editor);
 
 }

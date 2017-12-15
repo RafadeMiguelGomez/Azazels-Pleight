@@ -20,7 +20,7 @@ public class ConditionCollection : ScriptableObject {
         }
         if (reactionCollection)
         {
-            //reactionCollection.React();
+            reactionCollection.React();
         }
         return true;
     }

@@ -41,7 +41,7 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
         CleanupEditors();
     }
 
-    protected override void SubEditorSetip (ConditionEditor editor)
+    protected override void SubEditorSetup (ConditionEditor editor)
     {
         editor.editorType = ConditionEditor.EditorType.ConditionCollection;
         editor.conditionsProperty = conditionsProperty;
@@ -51,7 +51,7 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
     {
         serializedObject.Update();
 
-        //CheckAndCreateSubEditors();
+        CheckAndCreateSubEditors(conditionCollection.requiredConditions); 
 
         EditorGUILayout.BeginVertical(GUI.skin.box);
         EditorGUI.indentLevel++;
@@ -60,9 +60,17 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
 
         descriptionProperty.isExpanded = EditorGUILayout.Foldout(descriptionProperty.isExpanded, descriptionProperty.stringValue);
 
-        //if(GUILayout.Button("Remove Collection", GUILayout.Width(collectionButtonWidth)))
+        if(GUILayout.Button("Remove Collection", GUILayout.Width(125)))
+        {
+            collectionsProperty.RemoveFromObjectArray(conditionCollection);
+        }
 
         EditorGUILayout.EndHorizontal();
+
+        if (descriptionProperty.isExpanded)
+        {
+            ExpandedGUI();
+        }
 
         EditorGUI.indentLevel--;
         EditorGUILayout.EndVertical();
@@ -86,7 +94,7 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
         EditorGUILayout.BeginVertical(GUI.skin.box);
         for (int i = 0; i < subEditors.Length; i++)
         {
-            //subEditors[i].OnIspectorGUI();
+            subEditors[i].OnInspectorGUI();
         }
         EditorGUILayout.EndHorizontal();
 
@@ -95,8 +103,10 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
         if (GUILayout.Button("+", GUILayout.Width(conditionButtonWidth)))
         {
             Condition newCondition = ConditionEditor.CreateCondition();
-            //conditionsProperty.AddToObjectArray(newCondition);
+            conditionsProperty.AddToObjectArray(newCondition);
         }
+        EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.Space();
         EditorGUILayout.PropertyField(reactionCollectionProperty);
     }
@@ -104,6 +114,11 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor,Co
     public static ConditionCollection CreateConditionCollection()
     {
         ConditionCollection newConditionCollection = CreateInstance<ConditionCollection>();
+
+        newConditionCollection.description = "New Condition Collection";
+        newConditionCollection.requiredConditions = new Condition[1];
+        newConditionCollection.requiredConditions[0] = ConditionEditor.CreateCondition();
+
         return newConditionCollection;
 
     }
